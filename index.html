@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <style>
+        #table td {
+            padding: 10px;
+            border: 1px solid black;
+        }
+
+        #pagination {
+            display: flex;
+            padding: 0 20px;
+            list-style-type: none;
+        }
+
+        #pagination li {
+            padding: 10px;
+            border: 1px solid black;
+        }
+
+        #pagination li:not(:last-child) {
+            margin-right: 5px;
+        }
+
+        #pagination li:hover,
+        #pagination li.active {
+            cursor: pointer;
+            color: red;
+            border: 1px solid red;
+        }
+
+        /*#pagination li{
+            display: none;
+        }
+        #pagination li.active {
+            display: block;
+        }*/
+
+        .container {
+            width: 800px;
+            margin: 300px auto 0px;
+        }
+        .page-nav{
+            display: flex;
+            align-items: center;
+        }
+        .nav-btn{
+            cursor: pointer;
+        }
+    </style>
+
+    <div class="container">
+        <table id="table">
+            <!-- <tr>
+                <td>name1</td>
+                <td>surname1</td>
+                <td>30</td>
+            </tr>
+            <tr>
+                <td>name2</td>
+                <td>surname2</td>
+                <td>30</td>
+            </tr>
+            <tr>
+                <td>name3</td>
+                <td>surname3</td>
+                <td>30</td>
+            </tr> -->
+        </table>
+        <div class="page-nav">
+            <button class="nav-btn prev" id="prev">Prev</button>
+            <ul id="pagination">
+                <!-- <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li> -->
+            </ul>
+            <button class="nav-btn next" id="next">Next</button>
+        </div>
+    </div>
+
+    <script src="common.js"></script>
+
+</body>
+
+</html>
