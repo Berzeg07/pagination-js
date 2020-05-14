@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cool pagination</title>
+</head>
+
+<body>
+    <style>
+        .pagination {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .pagination__item {
+            border: 1px solid black;
+            border-radius: 5px;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .pagination__item a {
+            padding: 10px;
+            display: block;
+            text-decoration: none;
+            color: black;
+        }
+
+        .current {
+            background: gray;
+            font-weight: bold;
+        }
+
+        .current a {
+            color: white;
+        }
+    </style>
+    
+    <ul class="pagination"></ul>
+
+    <script src="common.js"></script>
+</body>
+
+</html>
