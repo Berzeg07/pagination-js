@@ -167,12 +167,11 @@ function pagenavjs(paramsObj) {
     });
 
     function navPage(btn) {
-        var active = document.querySelector('.pagenavjs-page.active');
-
+        var active = $('.pagenavjs-navigate li.active');
         if (btn == 'next') {
-            var next = active.nextElementSibling;
+            var next = $(active).next();
         } else {
-            var next = active.previousElementSibling;
+            var next = $(active).prev();
         }
         if (next) {
             next.click();
