@@ -18,27 +18,20 @@ pagenavjs({
 });
 
 function pagenavjs(paramsObj) {
-    // console.log(pageContainer);
-    var _pageContainer = $(paramsObj.pageContainer);
-    var _navContainerWrap = $(paramsObj.navContainer);
-    var _usersArr = paramsObj.elementsArr;
+
+    var _pageContainer = $(paramsObj.pageContainer),
+        _navContainerWrap = $(paramsObj.navContainer),
+        _usersArr = paramsObj.elementsArr;
 
     $(_navContainerWrap).addClass('pagenavjs-navigate-wrap');
-
     $(_navContainerWrap).html('<ul class="pagenavjs-navigate"></ul>');
-
     $(_navContainerWrap).prepend('<button class="pagenavjs-button pagenavjs-prev"></button>');
     $(_navContainerWrap).append('<button class="pagenavjs-button pagenavjs-next"></button>');
 
-    var _navContainer = $('.pagenavjs-navigate');
-
-    // Кол-во выводимых блоков на странице *
-    var notesOnPage = paramsObj.countPageEl;
-
-    // Получаем кол-во элементов для пагинации *
-    var countOfItems = Math.ceil(_usersArr.length / notesOnPage);
-
-    var items = [];
+    var _navContainer = $('.pagenavjs-navigate'),
+        notesOnPage = paramsObj.countPageEl,
+        countOfItems = Math.ceil(_usersArr.length / notesOnPage),
+        items = [];
 
     function createNav(countMax) {
         items = [];
@@ -63,11 +56,10 @@ function pagenavjs(paramsObj) {
         }
     }
 
-    // Вывод первичной пагинации *
     createNav(5);
 
     function pageNavEllipse() {
-        $(_navContainer).append('<li class="pagenavjs-ellipsis">...</li>')
+        $(_navContainer).append('<li class="pagenavjs-ellipsis">...</li>');
     }
 
     $(_navContainer).on('click', 'li', function(event) {
@@ -138,7 +130,6 @@ function pagenavjs(paramsObj) {
                     li.innerHTML = i;
                     items.push(li);
                 }
-
                 for (var i = 1; i <= countOfItems; i++) {
                     if (i == 1) {
                         $(_navContainer).append(items[0]);
@@ -178,13 +169,11 @@ function pagenavjs(paramsObj) {
         }
     }
 
-    // Формируем элементы li для пагинации *
     function addLiEl(text, parent, isNum) {
         var pagination = $(parent);
         var li = document.createElement('li');
         li.innerHTML = text;
         $(pagination).append(li);
-
         if (isNum) {
             $(pagination).append(li);
             li.classList.add('pagenavjs-page');
@@ -196,22 +185,17 @@ function pagenavjs(paramsObj) {
 
     showPage(items[0]);
 
-    // Вывод страниц *
     function showPage(item) {
         var active = document.querySelector('.pagenavjs-page.active');
-
         if (active) {
             active.classList.remove('active');
         }
         active = item;
         item.classList.add('active');
-        // Получаем цифру в пагинации *
-        var pageNum = +item.innerHTML;
-        // Формула расчета для структуры вывода *
-        var start = (pageNum - 1) * notesOnPage;
-        var end = start + notesOnPage;
-        // Достаем данные из массива *
-        var notes = _usersArr.slice(start, end);
+        var pageNum = +item.innerHTML,
+            start = (pageNum - 1) * notesOnPage,
+            end = start + notesOnPage,
+            notes = _usersArr.slice(start, end);
         $(_pageContainer).html('');
         var elements = notes.join('');
         $(_pageContainer).html(elements);
