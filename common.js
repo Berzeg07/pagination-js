@@ -1,4 +1,4 @@
-let users = [{
+var users = [{
         name: 'name1',
         surname: 'surname1',
         age: 30
@@ -135,70 +135,53 @@ let users = [{
     },
 ];
 
-let table = document.querySelector('#table');
+var table = document.querySelector('#table');
 
 // Кол-во выводимых блоков на странице *
-let notesOnPage = 1;
+var notesOnPage = 2;
 
 // Получаем кол-во элементов для пагинации *
-let countOfItems = Math.ceil(users.length / notesOnPage);
+var countOfItems = Math.ceil(users.length / notesOnPage);
 // countOfItems = 20;
 
-let paginationWrap = document.querySelector('#pagination');
-let items = [];
+var paginationWrap = document.querySelector('#pagination');
+var items = [];
 
-function createNav({
+function createNav(
     countMax
-}) {
+) {
     items = [];
     // console.log('Элементы пагинации ', items);
-    let count = countMax;
+    var count = countMax;
     paginationWrap.innerHTML = '';
     if (countOfItems <= 10) {
         for (var i = 1; i <= countOfItems; i++) {
-            addLiEl({
-                text: i,
-                parent: '#pagination',
-                isNum: true
-            });
+            addLiEl(i, '#pagination', true);
         }
     } else {
         for (var i = 1; i <= countOfItems; i++) {
             if (i <= count) {
-                addLiEl({
-                    text: i,
-                    parent: '#pagination',
-                    isNum: true
-                });
+                addLiEl(i, '#pagination', true);
             }
             if (i == countOfItems - 2) {
-                addLiEl({
-                    text: '...',
-                    parent: '#pagination',
-                    isNum: false
-                });
+                addLiEl('...', '#pagination', false);
             }
             if (i == countOfItems) {
-                addLiEl({
-                    text: i,
-                    parent: '#pagination',
-                    isNum: true
-                });
+                addLiEl(i, '#pagination', true);
             }
         }
     }
 }
 
 // Вывод первичной пагинации *
-createNav({
-    countMax: 5
-});
+createNav(5);
 
 // Вывод по первому элементу пагинации *
+console.log('items[0]', items[0]);
 showPage(items[0]);
 
 paginationWrap.onclick = function(event) {
-    let target = event.target;
+    var target = event.target;
 
     if (target.tagName != 'LI' || target.innerHTML == '...') return;
     var num = Number(target.innerHTML) - 1;
@@ -210,36 +193,23 @@ paginationWrap.onclick = function(event) {
 
     if (countOfItems <= 10) {
         for (var i = 1; i <= countOfItems; i++) {
-            addLiEl({
-                text: i,
-                parent: '#pagination',
-                isNum: true
-            });
+            addLiEl(i, '#pagination', true);
         }
     } else {
         // Начало *
         if (num < 3) {
             for (var i = 1; i <= countOfItems; i++) {
                 if (i <= 5) {
-                    addLiEl({
-                        text: i,
-                        parent: '#pagination',
-                        isNum: true
-                    });
+                    addLiEl(i, '#pagination', true);
+
                 }
                 if (i == countOfItems - 2) {
-                    addLiEl({
-                        text: '...',
-                        parent: '#pagination',
-                        isNum: false
-                    });
+                    addLiEl('...', '#pagination', false);
+
                 }
                 if (i == countOfItems) {
-                    addLiEl({
-                        text: i,
-                        parent: '#pagination',
-                        isNum: true
-                    });
+                    addLiEl(i, '#pagination', true);
+
                 }
             }
         }
@@ -247,25 +217,13 @@ paginationWrap.onclick = function(event) {
         if (num >= 3 && num <= 6) {
             for (var i = 1; i <= countOfItems; i++) {
                 if (i <= num + 3) {
-                    addLiEl({
-                        text: i,
-                        parent: '#pagination',
-                        isNum: true
-                    });
+                    addLiEl(i, '#pagination', true);
                 }
                 if (i == countOfItems - 2) {
-                    addLiEl({
-                        text: '...',
-                        parent: '#pagination',
-                        isNum: false
-                    });
+                    addLiEl('...', '#pagination', false);
                 }
                 if (i == countOfItems) {
-                    addLiEl({
-                        text: i,
-                        parent: '#pagination',
-                        isNum: true
-                    });
+                    addLiEl(i, '#pagination', true);
                 }
             }
         }
@@ -273,7 +231,7 @@ paginationWrap.onclick = function(event) {
         if (num > 6 && num < countOfItems - 4) {
 
             for (var i = 1; i <= countOfItems; i++) {
-                let li = document.createElement('li');
+                var li = document.createElement('li');
                 li.innerHTML = i;
                 items.push(li);
             }
@@ -283,7 +241,7 @@ paginationWrap.onclick = function(event) {
                     paginationWrap.appendChild(items[0]);
                 }
                 if (i == 2) {
-                    let li = document.createElement('li');
+                    var li = document.createElement('li');
                     li.innerHTML = '...';
                     paginationWrap.appendChild(li);
                     li.style.cursor = 'text';
@@ -291,12 +249,12 @@ paginationWrap.onclick = function(event) {
                     li.style.color = 'black';
                 }
                 if (i == (num - 2) || i == (num - 1) || i == num || i == (num + 2) || i == (num + 1)) {
-                    let index = items[i];
+                    var index = items[i];
                     console.log('index ', i);
                     paginationWrap.appendChild(index);
                 }
                 if (i == countOfItems - 1) {
-                    let li = document.createElement('li');
+                    var li = document.createElement('li');
                     li.innerHTML = '...';
                     paginationWrap.appendChild(li);
                     li.style.cursor = 'text';
@@ -304,15 +262,15 @@ paginationWrap.onclick = function(event) {
                     li.style.color = 'black';
                 }
                 if (i == countOfItems) {
-                    let currentIndex = i - 1;
-                    let index = items[currentIndex]
+                    var currentIndex = i - 1;
+                    var index = items[currentIndex]
                     paginationWrap.appendChild(index);
                 }
             }
         }
         if (num >= countOfItems - 4) {
             for (var i = 1; i <= countOfItems; i++) {
-                let li = document.createElement('li');
+                var li = document.createElement('li');
                 li.innerHTML = i;
                 items.push(li);
             }
@@ -322,16 +280,16 @@ paginationWrap.onclick = function(event) {
                     paginationWrap.appendChild(items[0]);
                 }
                 if (i == 2) {
-                    let li = document.createElement('li');
+                    var li = document.createElement('li');
                     li.innerHTML = '...';
                     paginationWrap.appendChild(li);
                     li.style.cursor = 'text';
                     li.style.border = '1px solid black';
                     li.style.color = 'black';
                 }
-                if (i == (num - 2) || i == (num - 1) || i == num || i >+ num) {
-                    let currentIndex = i - 1;
-                    let index = items[currentIndex]
+                if (i == (num - 2) || i == (num - 1) || i == num || i > +num) {
+                    var currentIndex = i - 1;
+                    var index = items[currentIndex]
                     paginationWrap.appendChild(index);
                 }
             }
@@ -346,21 +304,15 @@ var next = document.getElementById('next');
 var prev = document.getElementById('prev');
 
 next.addEventListener('click', function() {
-    navPage({
-        btn: 'next'
-    })
+    navPage('next');
 });
 
 prev.addEventListener('click', function() {
-    navPage({
-        btn: 'prev'
-    })
+    navPage('prev');
 });
 
-function navPage({
-    btn
-}) {
-    let active = document.querySelector('#pagination li.active');
+function navPage(btn) {
+    var active = document.querySelector('#pagination li.active');
     if (btn == 'next') {
         var next = active.nextElementSibling;
     } else {
@@ -373,18 +325,18 @@ function navPage({
 
 // Создание ячеек *
 function createCell(text, tr) {
-    let td = document.createElement('td');
+    var td = document.createElement('td');
     td.innerHTML = text;
     tr.appendChild(td);
 }
 // Формируем элементы li для пагинации *
-function addLiEl({
+function addLiEl(
     text,
     parent,
     isNum
-}) {
-    let pagination = document.querySelector(parent);
-    let li = document.createElement('li');
+) {
+    var pagination = document.querySelector(parent);
+    var li = document.createElement('li');
     li.innerHTML = text;
     pagination.appendChild(li);
     if (isNum) {
@@ -398,14 +350,14 @@ function addLiEl({
 
 // Вывод страниц *
 function showPage(item) {
-    let active = document.querySelector('#pagination li.active');
+    var active = document.querySelector('#pagination li.active');
     if (active) {
         active.classList.remove('active');
     }
     active = item;
     item.classList.add('active');
     // Получаем цифру в пагинации *
-    let pageNum = +item.innerHTML;
+    var pageNum = +item.innerHTML;
 
     /**
      * Структура вывода *
@@ -419,22 +371,54 @@ function showPage(item) {
      */
 
     // Формула расчета для структуры вывода *
-    let start = (pageNum - 1) * notesOnPage;
-    let end = start + notesOnPage;
+    var start = (pageNum - 1) * notesOnPage;
+    var end = start + notesOnPage;
 
     // Достаем данные из массива *
-    let notes = users.slice(start, end);
-    // console.log(notes);
+    var notes = users.slice(start, end);
+    console.log('notes', notes);
 
     table.innerHTML = '';
     // Формируем таблицу *
-    for (let note of notes) {
-        let tr = document.createElement('tr');
+    for(var i = 0; i < notes.length; i++){
+        var tr = document.createElement('tr');
         table.appendChild(tr);
 
-        createCell(note.name, tr);
-        createCell(note.surname, tr);
-        createCell(note.age, tr);
-
+        createCell(notes[i].name, tr);
+        createCell(notes[i].surname, tr);
+        createCell(notes[i].age, tr);
     }
+    // for (var note of notes) {
+    //     var tr = document.createElement('tr');
+    //     table.appendChild(tr);
+    //
+    //     createCell(note.name, tr);
+    //     createCell(note.surname, tr);
+    //     createCell(note.age, tr);
+    //
+    // }
 }
+
+// (function (arr) {
+//   arr.forEach(function (item) {
+//     if (item.hasOwnProperty('append')) {
+//       return;
+//     }
+//     Object.defineProperty(item, 'append', {
+//       configurable: true,
+//       enumerable: true,
+//       writable: true,
+//       value: function append() {
+//         var argArr = Array.prototype.slice.call(arguments),
+//           docFrag = document.createDocumentFragment();
+//
+//         argArr.forEach(function (argItem) {
+//           var isNode = argItem instanceof Node;
+//           docFrag.appendChild(isNode ? argItem : document.createTextNode(String(argItem)));
+//         });
+//
+//         this.appendChild(docFrag);
+//       }
+//     });
+//   });
+// })([Element.prototype, Document.prototype, DocumentFragment.prototype]);
